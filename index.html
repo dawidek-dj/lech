@@ -5,7 +5,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Lista koszulek i bluz</title>
 <style>
-    :root{
+    :root {
         --bg:#0f1216; --card:#181c22; --text:#e9eef5; --muted:#9aa5b1; --accent:#21c17a;
         --table-border:rgba(255,255,255,.08); --radius:14px; --shadow:0 8px 24px rgba(0,0,0,.3);
         --glow:0 0 0 1px rgba(33,193,122,.4), 0 10px 24px rgba(33,193,122,.15);
@@ -19,7 +19,19 @@
     .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#12161c;border:1px solid var(--table-border);cursor:pointer;font-weight:600;font-size:13px}
     .chip input{accent-color:var(--accent)}
     .totals{margin-left:auto;color:var(--muted);font-size:14px}
-    .grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Domyślnie 3 produkty w linii */
+        gap: 22px;
+    }
+
+    @media (max-width: 768px) {
+        .grid {
+            grid-template-columns: 1fr; /* Na urządzeniach mobilnych, 1 produkt w linii */
+        }
+    }
     .card{background:var(--card);border:1px solid var(--table-border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s ease,transform .2s ease}
     .card.available{box-shadow:var(--glow);border-color:rgba(33,193,122,.45)}
     .card.hide{display:none}
@@ -805,4 +817,5 @@
 </script>
 </body>
 </html>
+
 
