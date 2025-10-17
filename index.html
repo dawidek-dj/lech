@@ -6,229 +6,65 @@
 <title>Lista koszulek i bluz</title>
 <style>
     :root {
-        --bg: #0f1216;
-        --card: #181c22;
-        --text: #e9eef5;
-        --muted: #9aa5b1;
-        --accent: #21c17a;
-        --table-border: rgba(255, 255, 255, .08);
-        --radius: 14px;
-        --shadow: 0 8px 24px rgba(0, 0, 0, .3);
-        --glow: 0 0 0 1px rgba(33, 193, 122, .4), 0 10px 24px rgba(33, 193, 122, .15);
+        --bg:#0f1216; --card:#181c22; --text:#e9eef5; --muted:#9aa5b1; --accent:#21c17a;
+        --table-border:rgba(255,255,255,.08); --radius:14px; --shadow:0 8px 24px rgba(0,0,0,.3);
+        --glow:0 0 0 1px rgba(33,193,122,.4), 0 10px 24px rgba(33,193,122,.15);
     }
-    * {
-        box-sizing: border-box;
-    }
-    body {
-        margin: 0;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-        background: linear-gradient(120deg, #0b0e12, #12161c);
-        color: var(--text);
-        line-height: 1.5;
-        padding: 24px;
-    }
-    header {
-        max-width: 1100px;
-        margin: 0 auto 16px;
-        display: grid;
-        gap: 12px;
-    }
-    header h1 {
-        margin: 0;
-        font-size: clamp(20px, 2.6vw, 34px);
-    }
-    .toolbar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        background: rgba(255, 255, 255, .04);
-        border: 1px solid var(--table-border);
-        padding: 10px 12px;
-        border-radius: 12px;
-    }
-    .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: #12161c;
-        border: 1px solid var(--table-border);
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 13px;
-    }
-    .chip input {
-        accent-color: var(--accent);
-    }
-    .totals {
-        margin-left: auto;
-        color: var(--muted);
-        font-size: 14px;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(120deg,#0b0e12,#12161c);color:var(--text);line-height:1.5;padding:24px}
+    header{max-width:1100px;margin:0 auto 16px;display:grid;gap:12px}
+    header h1{margin:0;font-size:clamp(20px,2.6vw,34px)}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--table-border);padding:10px 12px;border-radius:12px}
+    .filters{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#12161c;border:1px solid var(--table-border);cursor:pointer;font-weight:600;font-size:13px}
+    .chip input{accent-color:var(--accent)}
+    .totals{margin-left:auto;color:var(--muted);font-size:14px}
     .grid {
         max-width: 1100px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* Domyślnie 3 produkty w linii */
         gap: 22px;
     }
+
     @media (max-width: 768px) {
         .grid {
-            grid-template-columns: 1fr; /* Zmiana układu na urządzeniach mobilnych */
+            grid-template-columns: 1fr; /* Na urządzeniach mobilnych, 1 produkt w linii */
         }
     }
-    .card {
-        background: var(--card);
-        border: 1px solid var(--table-border);
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        display: grid;
-        grid-template-rows: auto 1fr;
-        transition: box-shadow .2s ease, transform .2s ease;
-    }
-    .card.available {
-        box-shadow: var(--glow);
-        border-color: rgba(33, 193, 122, .45);
-    }
-    .card.hide {
-        display: none;
-    }
-    .image-wrap {
-        width: 100%;
-        background: #0f1319;
-        display: grid;
-        place-items: center;
-        padding: 12px;
-        border-bottom: 1px solid var(--table-border);
-    }
-    .image-wrap img {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-        display: block;
-        cursor: pointer; /* Zmieniamy kursor na wskazujący, aby sugerować kliknięcie */
-    }
-    .meta {
-        padding: 16px 16px 6px;
-    }
-    h2 {
-        margin: 0 0 6px;
-        font-size: 20px;
-        font-weight: 700;
-    }
-    .subtitle {
-        margin: 0 0 12px;
-        color: var(--muted);
-        font-size: 14px;
-    }
-    table.sizes {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-        background: rgba(255, 255, 255, .02);
-        border: 1px solid var(--table-border);
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    table.sizes thead th {
-        text-align: left;
-        padding: 10px 12px;
-        border-bottom: 1px solid var(--table-border);
-        background: rgba(255, 255, 255, .03);
-    }
-    table.sizes td {
-        padding: 10px 12px;
-        border-bottom: 1px dashed var(--table-border);
-    }
-    table.sizes tr:last-child td {
-        border-bottom: none;
-    }
-    .badge {
-        display: inline-block;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: rgba(33, 193, 122, .12);
-        color: var(--accent);
-        border: 1px solid rgba(33, 193, 122, .3);
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: .3px;
-    }
-    .hint {
-        color: var(--muted);
-        font-size: 13px;
-    }
-
-    /* Modal styling */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .modal-content {
-        background: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        max-width: 90%;
-        max-height: 90%;
-        overflow: auto;
-        text-align: center;
-    }
-
-    .modal img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        color: white;
-        background: red;
-        border: none;
-        padding: 10px;
-        border-radius: 50%;
-        cursor: pointer;
-    }
+    .card{background:var(--card);border:1px solid var(--table-border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s ease,transform .2s ease}
+    .card.available{box-shadow:var(--glow);border-color:rgba(33,193,122,.45)}
+    .card.hide{display:none}
+    .image-wrap{width:100%;background:#0f1319;display:grid;place-items:center;padding:12px;border-bottom:1px solid var(--table-border)}
+    .image-wrap img{width:100%;max-width:300px;height:auto;display:block}
+    .meta{padding:16px 16px 6px}
+    h2{margin:0 0 6px;font-size:20px;font-weight:700}
+    .subtitle{margin:0 0 12px;color:var(--muted);font-size:14px}
+    table.sizes{width:100%;border-collapse:collapse;font-size:14px;background:rgba(255,255,255,.02);border:1px solid var(--table-border);border-radius:10px;overflow:hidden}
+    table.sizes thead th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--table-border);background:rgba(255,255,255,.03)}
+    table.sizes td{padding:10px 12px;border-bottom:1px dashed var(--table-border)}
+    table.sizes tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(33,193,122,.12);color:var(--accent);border:1px solid rgba(33,193,122,.3);font-size:12px;font-weight:600;letter-spacing:.3px}
+    .hint{color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
 <header>
-    <div class='toolbar'>
-        <div class='filters' id='filters'>
-            <label class='chip'><input type='checkbox' value='koszulka' checked> Koszulki</label>
-            <label class='chip'><input type='checkbox' value='bluza' checked> Bluzy</label>
-            <label class='chip'><input type='checkbox' value='S' checked> S</label>
-            <label class='chip'><input type='checkbox' value='M' checked> M</label>
-            <label class='chip'><input type='checkbox' value='L' checked> L</label>
-            <label class='chip'><input type='checkbox' value='XL' checked> XL</label>
-            <label class='chip'><input type='checkbox' value='XXL' checked> XXL</label>
-        </div>
-        <div class='totals' id='totals'>Łącznie: –</div>
+  <div class='toolbar'>
+    <div class='filters' id='filters'>
+      <label class='chip'><input type='checkbox' value='koszulka' checked> Koszulki</label>
+      <label class='chip'><input type='checkbox' value='bluza' checked> Bluzy</label>
+      <label class='chip'><input type='checkbox' value='S' checked> S</label>
+      <label class='chip'><input type='checkbox' value='M' checked> M</label>
+      <label class='chip'><input type='checkbox' value='L' checked> L</label>
+      <label class='chip'><input type='checkbox' value='XL' checked> XL</label>
+      <label class='chip'><input type='checkbox' value='XXL' checked> XXL</label>
     </div>
+    <div class='totals' id='totals'>Łącznie: –</div>
+  </div>
 </header>
 <main class='grid' id='grid'>
-<!-- Koszulki -->
+  <!-- Koszulki -->
   <section class='card' data-type='koszulka' data-size-s='2' data-size-m='2' data-size-l='1' data-size-xl='0' data-size-xxl='0'>
     <div class='image-wrap'>
       <img src='koszulka1.png' alt='Koszulka 1'>
@@ -918,50 +754,6 @@
 	</section>
 </main>
 
-<!-- Modal do podglądu koszulki -->
-<div id="productModal" class="modal">
-    <div class="modal-content">
-        <button id="closeModal" class="close-btn">×</button>
-        <img id="modalImage" src="" alt="Produkt" />
-    </div>
-</div>
-
-<script>
-    // Funkcja do otwierania modalu
-    const openModal = (imgSrc) => {
-        const modal = document.getElementById('productModal');
-        const modalImage = document.getElementById('modalImage');
-        modalImage.src = imgSrc;  // Ustawiamy obrazek w modalu
-        modal.style.display = 'flex';  // Pokazujemy modal
-    };
-
-    // Funkcja do zamykania modalu
-    const closeModal = () => {
-        const modal = document.getElementById('productModal');
-        modal.style.display = 'none';  // Ukrywamy modal
-    };
-
-    // Dodajemy nasłuchiwanie kliknięć na zdjęcia produktów
-    const productImages = document.querySelectorAll('.card img');
-    productImages.forEach(img => {
-        img.addEventListener('click', (e) => {
-            openModal(e.target.src);  // Otwieramy modal z odpowiednim zdjęciem
-        });
-    });
-
-    // Dodajemy nasłuchiwanie na zamknięcie modalu
-    const closeButton = document.getElementById('closeModal');
-    closeButton.addEventListener('click', closeModal);
-
-    // Zamykamy modal, jeśli klikniemy poza jego obszar
-    const modal = document.getElementById('productModal');
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-</script>
-
 <script>
 (function() {
   const grid = document.getElementById('grid');
@@ -1025,7 +817,3 @@
 </script>
 </body>
 </html>
-
-
-
-
