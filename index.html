@@ -1,52 +1,68 @@
 <!doctype html>
 <html lang='pl'>
 <head>
-<meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>Lista koszulek i bluz</title>
-<style>
-    :root {
-        --bg:#0f1216; --card:#181c22; --text:#e9eef5; --muted:#9aa5b1; --accent:#21c17a;
-        --table-border:rgba(255,255,255,.08); --radius:14px; --shadow:0 8px 24px rgba(0,0,0,.3);
-        --glow:0 0 0 1px rgba(33,193,122,.4), 0 10px 24px rgba(33,193,122,.15);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(120deg,#0b0e12,#12161c);color:var(--text);line-height:1.5;padding:24px}
-    header{max-width:1100px;margin:0 auto 16px;display:grid;gap:12px}
-    header h1{margin:0;font-size:clamp(20px,2.6vw,34px)}
-    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--table-border);padding:10px 12px;border-radius:12px}
-    .filters{display:flex;flex-wrap:wrap;gap:10px}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#12161c;border:1px solid var(--table-border);cursor:pointer;font-weight:600;font-size:13px}
-    .chip input{accent-color:var(--accent)}
-    .totals{margin-left:auto;color:var(--muted);font-size:14px}
-    .grid {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Domyślnie 3 produkty w linii */
-        gap: 22px;
-    }
-
-    @media (max-width: 768px) {
-        .grid {
-            grid-template-columns: 1fr; /* Na urządzeniach mobilnych, 1 produkt w linii */
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Lista koszulek i bluz</title>
+    <style>
+        :root {
+            --bg:#0f1216; --card:#181c22; --text:#e9eef5; --muted:#9aa5b1; --accent:#21c17a;
+            --table-border:rgba(255,255,255,.08); --radius:14px; --shadow:0 8px 24px rgba(0,0,0,.3);
+            --glow:0 0 0 1px rgba(33,193,122,.4), 0 10px 24px rgba(33,193,122,.15);
         }
-    }
-    .card{background:var(--card);border:1px solid var(--table-border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s ease,transform .2s ease}
-    .card.available{box-shadow:var(--glow);border-color:rgba(33,193,122,.45)}
-    .card.hide{display:none}
-    .image-wrap{width:100%;background:#0f1319;display:grid;place-items:center;padding:12px;border-bottom:1px solid var(--table-border)}
-    .image-wrap img{width:100%;max-width:300px;height:auto;display:block}
-    .meta{padding:16px 16px 6px}
-    h2{margin:0 0 6px;font-size:20px;font-weight:700}
-    .subtitle{margin:0 0 12px;color:var(--muted);font-size:14px}
-    table.sizes{width:100%;border-collapse:collapse;font-size:14px;background:rgba(255,255,255,.02);border:1px solid var(--table-border);border-radius:10px;overflow:hidden}
-    table.sizes thead th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--table-border);background:rgba(255,255,255,.03)}
-    table.sizes td{padding:10px 12px;border-bottom:1px dashed var(--table-border)}
-    table.sizes tr:last-child td{border-bottom:none}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(33,193,122,.12);color:var(--accent);border:1px solid rgba(33,193,122,.3);font-size:12px;font-weight:600;letter-spacing:.3px}
-    .hint{color:var(--muted);font-size:13px}
-</style>
+        *{box-sizing:border-box}
+        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(120deg,#0b0e12,#12161c);color:var(--text);line-height:1.5;padding:24px}
+        header{max-width:1100px;margin:0 auto 16px;display:grid;gap:12px}
+        header h1{margin:0;font-size:clamp(20px,2.6vw,34px)}
+        .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--table-border);padding:10px 12px;border-radius:12px}
+        .filters{display:flex;flex-wrap:wrap;gap:10px}
+        .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#12161c;border:1px solid var(--table-border);cursor:pointer;font-weight:600;font-size:13px}
+        .chip input{accent-color:var(--accent)}
+        .totals{margin-left:auto;color:var(--muted);font-size:14px}
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card{background:var(--card);border:1px solid var(--table-border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s ease,transform .2s ease}
+        .card.available{box-shadow:var(--glow);border-color:rgba(33,193,122,.45)}
+        .card.hide{display:none}
+        .image-wrap{width:100%;background:#0f1319;display:grid;place-items:center;padding:12px;border-bottom:1px solid var(--table-border)}
+        .image-wrap img{width:100%;max-width:300px;height:auto;display:block;cursor:pointer;}
+        .meta{padding:16px 16px 6px}
+        h2{margin:0 0 6px;font-size:20px;font-weight:700}
+        .subtitle{margin:0 0 12px;color:var(--muted);font-size:14px}
+        table.sizes{width:100%;border-collapse:collapse;font-size:14px;background:rgba(255,255,255,.02);border:1px solid var(--table-border);border-radius:10px;overflow:hidden}
+        table.sizes thead th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--table-border);background:rgba(255,255,255,.03)}
+        table.sizes td{padding:10px 12px;border-bottom:1px dashed var(--table-border)}
+        table.sizes tr:last-child td{border-bottom:none}
+        .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(33,193,122,.12);color:var(--accent);border:1px solid rgba(33,193,122,.3);font-size:12px;font-weight:600;letter-spacing:.3px}
+        .hint{color:var(--muted);font-size:13px}
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -63,6 +79,7 @@
     <div class='totals' id='totals'>Łącznie: –</div>
   </div>
 </header>
+
 <main class='grid' id='grid'>
   <!-- Koszulki -->
   <section class='card' data-type='koszulka' data-size-s='2' data-size-m='2' data-size-l='1' data-size-xl='0' data-size-xxl='0'>
@@ -754,6 +771,31 @@
 	</section>
 </main>
 
+<div class="overlay" id="imageOverlay" onclick="closeImage()">
+    <img id="overlayImage" src="" alt="Podgląd obrazu">
+</div>
+
+<script>
+    function openImage(src) {
+        const overlay = document.getElementById("imageOverlay");
+        const overlayImage = document.getElementById("overlayImage");
+        overlay.style.display = "flex";
+        overlayImage.src = src;
+    }
+
+    function closeImage() {
+        const overlay = document.getElementById("imageOverlay");
+        overlay.style.display = "none";
+    }
+
+    document.querySelectorAll('.image-wrap img').forEach(img => {
+        img.addEventListener('click', function() {
+            openImage(this.src);
+        });
+    });
+</script>
+
+
 <script>
 (function() {
   const grid = document.getElementById('grid');
@@ -817,3 +859,4 @@
 </script>
 </body>
 </html>
+
